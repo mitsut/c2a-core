@@ -21,7 +21,8 @@
 - `hal`（旧 `IfWrapper`）のうち，古すぎるインターフェースを排除: [#23](https://github.com/arkedge/c2a-core/issues/23), [#25](https://github.com/arkedge/c2a-core/pull/25)
   - 既に使われてしまっているものについては，各 C2A user で一旦雑に古いヘッダファイルを各々で持って対応可能（今後再設計する予定）
 - CMake option の整理: [#86](https://github.com/arkedge/c2a-core/pull/86)
-  - `C2A_` prefix に統一した他，意味が分かりにくい命名の変更，今後 optional としていく挙動を default OFF とした
+  - `C2A_` prefix に統一した（これはコーディング規約にも追加）
+  - 意味が分かりにくい命名の変更，今後 optional としていく挙動を default OFF とした
   - `option()` の挙動はユーザ指定によってかなり変わるため，該当する変更は単なるビルドチェックなどではなくすべて grep して変更すること
   - `BUILD_C2A_AS_UTF8` -> `C2A_BUILD_AS_UTF8`
   - `BUILD_C2A_AS_C99` -> `C2A_BUILD_AS_C99`
