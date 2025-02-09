@@ -1,0 +1,3 @@
+[submodule "examples/hakoniwa-client"]
+	path = examples/hakoniwa-client
+	url = git@github.com:toppers/hakoniwa-core-cpp-client.git
