@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::env;
 use std::path::PathBuf;
-
+use c2a_bind_utils::bind_c2a_builder;  // bindgenの直接使用を避ける
 use semver::Version;
 
 use clang::{token::TokenKind::Punctuation, Clang, Index};
@@ -44,6 +44,31 @@ fn main() {
     bind("hal".into(), "wdt.h");
 
     bind("library".into(), "result.h");
+
+    // libassetsとlibconductorをリンク
+    println!("cargo:rustc-link-search=/usr/local/lib/hakoniwa");
+    println!("cargo:rustc-link-lib=assets");
+    println!("cargo:rustc-link-lib=conductor");
+
+    // ヘッダーファイルが変更された場合に再ビルド
+    println!("cargo:rerun-if-changed=/usr/local/include/hakoniwa/hako_asset.h");
+    println!("cargo:rerun-if-changed=/usr/local/include/hakoniwa/hako_conductor.h");
+    println!("cargo:rerun-if-changed=/usr/local/include/hakoniwa/hako_primitive_types.h");
+
+    // bindgenの設定
+    let bindings = bind_c2a_builder()
+        .header("/usr/local/include/hakoniwa/hako_asset.h")
+        .header("/usr/local/include/hakoniwa/hako_conductor.h")
+        .header("/usr/local/include/hakoniwa/hako_primitive_types.h")
+        .generate()
+        .expect("Unable to generate bindings");
+
+    // 生成したバインディングを出力
+    // let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
+    let out_path = PathBuf::from("dev-runtime/src");
+    bindings
+        .write_to_file(out_path.join("hakoniwa_bindings.rs"))
+        .expect("Failed to write bindings");
 }
 
 fn bind(module: PathBuf, header: &str) {
