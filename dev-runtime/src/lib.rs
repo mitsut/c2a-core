@@ -1,10 +1,24 @@
 use std::{thread, time};
 
+// バインディングのインクルード
+#[allow(non_upper_case_globals)]
+#[allow(non_camel_case_types)]
+#[allow(non_snake_case)]
+mod hakoniwa {
+    include!("hakoniwa_bindings.rs");
+}
+use hakoniwa::*;
+
 const UPDATE_BATCH_SIZE: usize = 100;
 const UPDATE_BATCH_IN_REALTIME: time::Duration = time::Duration::from_millis(100);
 
 pub fn c2a_init() {
     use c2a_core::*;
+
+    unsafe {
+        // Hakoniwa初期化の例
+        hako_conductor_start(1000 * 1000 * 10, 1000 * 1000 * 10);
+    }
 
     unsafe {
         system::watchdog_timer::WDT_init();
