@@ -21,7 +21,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \
     curl python3-dev libc++-dev libc++abi-dev \
     gcc-multilib g++-multilib nlohmann-json3-dev \
-    libc6-dev libc6-dev-i386 \
+    libc6-dev libc6-dev-i386 llvm-dev libclang-dev clang\
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install rustup, nvm, yarn, and Rye
