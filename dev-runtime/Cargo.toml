@@ -3,6 +3,7 @@ name = "c2a-dev-runtime"
 description = "Common C2A runtime for development"
 version.workspace = true
 edition = "2021"
+build = "build.rs"  # build.rsを使用する設定を追加
 
 [lib]
 test = false   # 呼んでいる C2A の関数をリンクできないので，unit test はしない（できない）
@@ -10,3 +11,7 @@ test = false   # 呼んでいる C2A の関数をリンクできないので，u
 
 [dependencies]
 c2a-core = "4"
+libc = "0.2"  # C言語とのインターフェースのためのライブラリ
+
+[build-dependencies]
+c2a-bind-utils.workspace = true
