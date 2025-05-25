@@ -86,14 +86,52 @@ extern "C" fn on_reset(_context: *mut hako_asset_context_t) -> ::std::os::raw::c
 extern "C" fn on_simulation_step(_context: *mut hako_asset_context_t) -> ::std::os::raw::c_int {
     unsafe {
         let time = hako_asset_simulation_time();
-        if time % 1000000 == 0 {  // 1秒ごとに表示（マイクロ秒単位）
-            println!("INFO: C2A simulation step: time={}", time);
+        // if time % 1000000 == 0 {  // 1秒ごとに表示（マイクロ秒単位）
+        //     println!("INFO: C2A simulation step: time={}", time);
+        // }
+        use c2a_core::*;
+
+        let start = time::Instant::now();
+        for _ in 0..UPDATE_BATCH_SIZE {
+            unsafe {
+                system::time_manager::TMGR_count_up_master_clock();
+                C2A_core_main();
+            }
         }
+        let elapsed_time = start.elapsed();
+        if elapsed_time < UPDATE_BATCH_IN_REALTIME {
+            let duration_to_sleep = UPDATE_BATCH_IN_REALTIME - elapsed_time;
+            thread::sleep(duration_to_sleep);
+        }
+
     }
     0
 }
 
 pub fn c2a_init() {
+    use c2a_core::*;
+    
+    // C2A初期化関数を明示的にc2a_core::から呼び出す
+    // C2A_core_initはc2a-coreクレートが提供する関数
+    unsafe {
+        system::watchdog_timer::WDT_init();
+        system::time_manager::TMGR_init(); // Time Manager
+    }
+
+    unsafe {
+        C2A_core_init();
+    }
+
+
+    // TaskDispatcherでの大量のアノマリを避けるために、一度時刻を初期化する。
+    unsafe {
+        system::time_manager::TMGR_clear();
+    }
+    println!("C2A_init: TMGR_init done.");
+}
+
+pub fn c2a_main() {
+    // 未使用のimportを削除
     use c2a_core::*;
 
     // Hakoniwa初期化
@@ -141,41 +179,20 @@ pub fn c2a_init() {
         let start_ret = unsafe { hako_asset_start() };
         println!("INFO: hako_asset_start() returns {}", start_ret);
     }
-    
-    // C2A初期化関数を明示的にc2a_core::から呼び出す
-    // C2A_core_initはc2a-coreクレートが提供する関数
-    unsafe {
-        system::watchdog_timer::WDT_init();
-        system::time_manager::TMGR_init(); // Time Manager
-    }
 
-    unsafe {
-        C2A_core_init();
-    }
-
-    // TaskDispatcherでの大量のアノマリを避けるために、一度時刻を初期化する。
-    unsafe {
-        system::time_manager::TMGR_clear();
-    }
-    println!("C2A_init: TMGR_init done.");
-}
-
-pub fn c2a_main() {
-    use c2a_core::*;
-
-    loop {
-        let start = time::Instant::now();
-        for _ in 0..UPDATE_BATCH_SIZE {
-            unsafe {
-                system::time_manager::TMGR_count_up_master_clock();
-                C2A_core_main();
-            }
-        }
-        let elapsed_time = start.elapsed();
-        if elapsed_time < UPDATE_BATCH_IN_REALTIME {
-            let duration_to_sleep = UPDATE_BATCH_IN_REALTIME - elapsed_time;
-            thread::sleep(duration_to_sleep);
-        }
-        // FIXME: 時間がめっちゃ遅れてたときの時間回復は一旦しない
-    }
+    // loop {
+    //     let start = time::Instant::now();
+    //     for _ in 0..UPDATE_BATCH_SIZE {
+    //         unsafe {
+    //             system::time_manager::TMGR_count_up_master_clock();
+    //             C2A_core_main();
+    //         }
+    //     }
+    //     let elapsed_time = start.elapsed();
+    //     if elapsed_time < UPDATE_BATCH_IN_REALTIME {
+    //         let duration_to_sleep = UPDATE_BATCH_IN_REALTIME - elapsed_time;
+    //         thread::sleep(duration_to_sleep);
+    //     }
+    //     // FIXME: 時間がめっちゃ遅れてたときの時間回復は一旦しない
+    // }
 }
