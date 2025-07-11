@@ -93,10 +93,9 @@ extern "C" fn on_simulation_step(_context: *mut hako_asset_context_t) -> ::std::
 
         let start = time::Instant::now();
         for _ in 0..UPDATE_BATCH_SIZE {
-            unsafe {
-                system::time_manager::TMGR_count_up_master_clock();
-                C2A_core_main();
-            }
+            // ネストしたunsafeブロックを削除
+            system::time_manager::TMGR_count_up_master_clock();
+            C2A_core_main();
         }
         let elapsed_time = start.elapsed();
         if elapsed_time < UPDATE_BATCH_IN_REALTIME {
@@ -134,16 +133,31 @@ pub fn c2a_main() {
     // 未使用のimportを削除
     use c2a_core::*;
 
+    // フォルダ名に基づいてアセット名を動的に生成
+    let asset_name_str = generate_asset_name();
+    println!("INFO: Using asset name: {}", asset_name_str);
+    
+    // asset_name_str を比較に使うので、クローンして所有権を保持
+    let asset_name = std::ffi::CString::new(asset_name_str.clone()).unwrap();
+    let config_path = std::ffi::CString::new("custom.json").unwrap();
+    
     // Hakoniwa初期化
     let delta_time_usec: hako_time_t = 1000 * 1000 * 10; // 10秒
-    
-    // 初期化前にHakoniwaのライブラリが見つかるか確認
-    let result = unsafe { hako_conductor_start(delta_time_usec, delta_time_usec) };
-    if result != 0 {
-        println!("WARNING: hako_conductor_start failed with code: {}", result);
-        println!("This might indicate Hakoniwa libraries are not found correctly");
+
+    // asset_name_str が "c2a_mobc"の場合、以下を実行する
+    if asset_name_str == "c2a_mobc" {
+        println!("INFO: c2a_mobc detected, using custom configuration");
+        
+        // 初期化前にHakoniwaのライブラリが見つかるか確認
+        let result = unsafe { hako_conductor_start(delta_time_usec, delta_time_usec) };
+        if result != 0 {
+            println!("WARNING: hako_conductor_start failed with code: {}", result);
+            println!("This might indicate Hakoniwa libraries are not found correctly");
+        } else {
+            println!("INFO: hako_conductor_start succeeded");
+        }
     } else {
-        println!("INFO: hako_conductor_start succeeded");
+        println!("INFO: Using default configuration for {}", asset_name_str);
     }
     
     // コールバック構造体の設定
@@ -153,12 +167,6 @@ pub fn c2a_main() {
         on_simulation_step: Some(on_simulation_step),
         on_manual_timing_control: None,
     };
-    
-    // フォルダ名に基づいてアセット名を動的に生成
-    let asset_name_str = generate_asset_name();
-    println!("INFO: Using asset name: {}", asset_name_str);
-    let asset_name = std::ffi::CString::new(asset_name_str).unwrap();
-    let config_path = std::ffi::CString::new("custom.json").unwrap();
     
     let ret = unsafe {
         hako_asset_register(
