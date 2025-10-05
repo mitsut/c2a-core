@@ -28,9 +28,9 @@ dependencies = [
 
 [[package]]
 name = "anyhow"
-version = "1.0.97"
+version = "1.0.99"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dcfed56ad506cb2c684a14971b8861fdc3baaaae314b9e5f9bb532cbe3ba7a4f"
+checksum = "b0674a1ddeecb70197781e945de4b3b8ffb61fa939a5597bcf48503737663100"
 
 [[package]]
 name = "async-trait"
@@ -216,7 +216,7 @@ dependencies = [
 
 [[package]]
 name = "c2a-bind-utils"
-version = "4.5.0"
+version = "4.5.1"
 dependencies = [
  "bindgen 0.69.5",
  "doxygen-rs",
@@ -236,26 +236,26 @@ dependencies = [
 
 [[package]]
 name = "c2a-core"
-version = "4.5.0"
+version = "4.5.1"
 dependencies = [
  "c2a-bind-utils 4.0.0-beta.0",
- "c2a-core 4.5.0",
+ "c2a-core 4.5.1",
  "clang",
  "semver",
 ]
 
 [[package]]
 name = "c2a-dev-runtime"
-version = "4.5.0"
+version = "4.5.1"
 dependencies = [
  "c2a-core 4.4.0",
 ]
 
 [[package]]
 name = "c2a-example-mobc"
-version = "4.5.0"
+version = "4.5.1"
 dependencies = [
- "c2a-core 4.5.0",
+ "c2a-core 4.5.1",
  "c2a-dev-runtime",
  "c2a-example-mobc-ccsds-kble",
  "c2a-uart-kble",
@@ -265,11 +265,11 @@ dependencies = [
 
 [[package]]
 name = "c2a-example-mobc-ccsds-kble"
-version = "4.5.0"
+version = "4.5.1"
 dependencies = [
  "anyhow",
- "c2a-bind-utils 4.5.0",
- "c2a-core 4.5.0",
+ "c2a-bind-utils 4.5.1",
+ "c2a-core 4.5.1",
  "futures",
  "kble-socket 0.2.0",
  "once_cell",
@@ -279,9 +279,9 @@ dependencies = [
 
 [[package]]
 name = "c2a-example-subobc"
-version = "4.5.0"
+version = "4.5.1"
 dependencies = [
- "c2a-core 4.5.0",
+ "c2a-core 4.5.1",
  "c2a-dev-runtime",
  "c2a-uart-kble",
  "c2a-wdt-noop",
@@ -290,21 +290,21 @@ dependencies = [
 
 [[package]]
 name = "c2a-i2c-noop"
-version = "4.5.0"
+version = "4.5.1"
 dependencies = [
  "c2a-core 4.4.0",
 ]
 
 [[package]]
 name = "c2a-spi-noop"
-version = "4.5.0"
+version = "4.5.1"
 dependencies = [
  "c2a-core 4.4.0",
 ]
 
 [[package]]
 name = "c2a-uart-kble"
-version = "4.5.0"
+version = "4.5.1"
 dependencies = [
  "anyhow",
  "axum",
@@ -317,14 +317,14 @@ dependencies = [
 
 [[package]]
 name = "c2a-uart-noop"
-version = "4.5.0"
+version = "4.5.1"
 dependencies = [
  "c2a-core 4.4.0",
 ]
 
 [[package]]
 name = "c2a-wdt-noop"
-version = "4.5.0"
+version = "4.5.1"
 dependencies = [
  "c2a-core 4.4.0",
 ]
@@ -949,9 +949,9 @@ dependencies = [
 
 [[package]]
 name = "once_cell"
-version = "1.20.2"
+version = "1.21.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1261fe7e33c73b354eab43b1273a57c8f967d0391e80353e51f764ac02cf6775"
+checksum = "42f5e15c9953c5e4ccceeb2e7382a716482c34515315f7b03532b8b4e8393d2d"
 
 [[package]]
 name = "peeking_take_while"
