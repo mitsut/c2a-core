@@ -28,9 +28,9 @@ dependencies = [
 
 [[package]]
 name = "anyhow"
-version = "1.0.95"
+version = "1.0.97"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "34ac096ce696dc2fcabef30516bb13c0a68a11d30131d3df6f04711467681b04"
+checksum = "dcfed56ad506cb2c684a14971b8861fdc3baaaae314b9e5f9bb532cbe3ba7a4f"
 
 [[package]]
 name = "async-trait"
@@ -216,21 +216,11 @@ dependencies = [
 
 [[package]]
 name = "c2a-bind-utils"
-version = "4.4.0"
+version = "4.5.0"
 dependencies = [
  "bindgen 0.69.5",
  "doxygen-rs",
  "home",
-]
-
-[[package]]
-name = "c2a-core"
-version = "4.4.0"
-dependencies = [
- "c2a-bind-utils 4.0.0-beta.0",
- "c2a-core 4.4.0",
- "clang",
- "semver",
 ]
 
 [[package]]
@@ -245,19 +235,27 @@ dependencies = [
 ]
 
 [[package]]
-name = "c2a-dev-runtime"
-version = "4.4.0"
+name = "c2a-core"
+version = "4.5.0"
 dependencies = [
- "c2a-bind-utils 4.4.0",
- "c2a-core 4.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "libc",
+ "c2a-bind-utils 4.0.0-beta.0",
+ "c2a-core 4.5.0",
+ "clang",
+ "semver",
+]
+
+[[package]]
+name = "c2a-dev-runtime"
+version = "4.5.0"
+dependencies = [
+ "c2a-core 4.4.0",
 ]
 
 [[package]]
 name = "c2a-example-mobc"
-version = "4.4.0"
+version = "4.5.0"
 dependencies = [
- "c2a-core 4.4.0",
+ "c2a-core 4.5.0",
  "c2a-dev-runtime",
  "c2a-example-mobc-ccsds-kble",
  "c2a-uart-kble",
@@ -267,11 +265,11 @@ dependencies = [
 
 [[package]]
 name = "c2a-example-mobc-ccsds-kble"
-version = "4.4.0"
+version = "4.5.0"
 dependencies = [
  "anyhow",
- "c2a-bind-utils 4.4.0",
- "c2a-core 4.4.0",
+ "c2a-bind-utils 4.5.0",
+ "c2a-core 4.5.0",
  "futures",
  "kble-socket 0.2.0",
  "once_cell",
@@ -281,9 +279,9 @@ dependencies = [
 
 [[package]]
 name = "c2a-example-subobc"
-version = "4.4.0"
+version = "4.5.0"
 dependencies = [
- "c2a-core 4.4.0",
+ "c2a-core 4.5.0",
  "c2a-dev-runtime",
  "c2a-uart-kble",
  "c2a-wdt-noop",
@@ -292,25 +290,25 @@ dependencies = [
 
 [[package]]
 name = "c2a-i2c-noop"
-version = "4.4.0"
+version = "4.5.0"
 dependencies = [
- "c2a-core 4.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "c2a-core 4.4.0",
 ]
 
 [[package]]
 name = "c2a-spi-noop"
-version = "4.4.0"
+version = "4.5.0"
 dependencies = [
- "c2a-core 4.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "c2a-core 4.4.0",
 ]
 
 [[package]]
 name = "c2a-uart-kble"
-version = "4.4.0"
+version = "4.5.0"
 dependencies = [
  "anyhow",
  "axum",
- "c2a-core 4.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "c2a-core 4.4.0",
  "futures",
  "kble-socket 0.3.0",
  "once_cell",
@@ -319,16 +317,16 @@ dependencies = [
 
 [[package]]
 name = "c2a-uart-noop"
-version = "4.4.0"
+version = "4.5.0"
 dependencies = [
- "c2a-core 4.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "c2a-core 4.4.0",
 ]
 
 [[package]]
 name = "c2a-wdt-noop"
-version = "4.4.0"
+version = "4.5.0"
 dependencies = [
- "c2a-core 4.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "c2a-core 4.4.0",
 ]
 
 [[package]]
@@ -1170,9 +1168,9 @@ checksum = "f7c45b9784283f1b2e7fb61b42047c2fd678ef0960d4f6f1eba131594cc369d4"
 
 [[package]]
 name = "semver"
-version = "1.0.24"
+version = "1.0.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3cb6eb87a131f756572d7fb904f6e7b68633f09cca868c5df1c4b8d1a694bbba"
+checksum = "56e6fa9c48d24d85fb3de5ad847117517440f6beceb7798af16b4a87d616b8d0"
 
 [[package]]
 name = "serde"

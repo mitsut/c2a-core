@@ -1,5 +1,5 @@
 [workspace.package]
-version = "4.4.0"
+version = "4.5.0"
 repository = "https://github.com/arkedge/c2a-core"
 
 [workspace]
@@ -32,6 +32,7 @@ c2a-uart-kble = { path = "./hal/uart-kble" }
 name = "c2a-core"
 version.workspace = true
 edition = "2021"
+rust-version = "1.78.0"
 
 description = "Core of Command Centric Architecture"
 readme = "README.md"
