@@ -7,9 +7,9 @@
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/rust:1": {},
-		"ghcr.io/devcontainers-contrib/features/npm-package:1": {},
-		"ghcr.io/devcontainers-contrib/features/pnpm:2": {},
-		"ghcr.io/devcontainers-contrib/features/protoc:1": {}
+		"ghcr.io/devcontainers-extra/features/npm-package:1": {},
+		"ghcr.io/devcontainers-extra/features/pnpm:2": {},
+		"ghcr.io/devcontainers-extra/features/protoc:1": {}
 	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
@@ -25,8 +25,9 @@
 	// "customizations": {},
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
-    "remoteEnv": {
+	// "remoteUser": "root",
+	
+	"remoteEnv": {
 		"LD_LIBRARY_PATH": "/usr/local/lib/hakoniwa:${containerEnv:LD_LIBRARY_PATH}"
 	}
 }
