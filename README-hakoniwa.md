@@ -6,8 +6,8 @@
 
 - DevContainerで作成する
 - C2Aは一応マルチホスト環境を目指しているが、確認環境はIntel Windowsである
-- そのためコンテナはIntel 32bitビルドを前提としている
-- Dockerfile
+- ~~そのためコンテナはIntel 32bitビルドを前提としている~~ 64bitビルドに変更しました
+- hakoniwa-core-cpp-clientをexampesフォルダにsubmoduleでおいている
 
 ## 箱庭のビルド
 
@@ -20,14 +20,6 @@ git submodule update --init --recursive
 ```
 
 とする
-
-DevConatinerで起動していればIntelのコンテナイメージでのC++の開発環境が整っているので　32bitビルドとPythonをインストールしないように以下の修正をする
-
-### build.bashの修正
-次のコメントアウトを外す
-```bash
-BUILD_C_FLAGS="-DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32"
-```
 
 ### install.bashの修正
 次をコメントアウトする
