@@ -141,8 +141,8 @@ pub fn c2a_main() {
     let asset_name = std::ffi::CString::new(asset_name_str.clone()).unwrap();
     let config_path = std::ffi::CString::new("custom.json").unwrap();
     
-    // Hakoniwa初期化
-    let delta_time_usec: hako_time_t = 1000 * 1000 * 10; // 10秒
+    // Hakoniwa初期化とシミュレータの時間刻み
+    let delta_time_usec: hako_time_t = 1000 * 100; // 100ms
 
     // asset_name_str が "c2a_mobc"の場合、以下を実行する
     if asset_name_str == "c2a_mobc" {
