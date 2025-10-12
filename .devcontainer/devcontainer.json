@@ -28,6 +28,7 @@
 	// "remoteUser": "root",
 	
 	"remoteEnv": {
-		"LD_LIBRARY_PATH": "/usr/local/lib/hakoniwa:${containerEnv:LD_LIBRARY_PATH}"
+		"LD_LIBRARY_PATH": "/usr/local/lib/hakoniwa:${containerEnv:LD_LIBRARY_PATH}",
+		"PATH": "/usr/local/bin/hakoniwa:${containerEnv:PATH}"
 	}
 }

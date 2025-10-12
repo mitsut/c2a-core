@@ -26,12 +26,24 @@ git submodule update --init --recursive
 ```bash
 # bash bindings/python/install.bash
 ```
+### ビルドとインストール
+```bash
+bash install.bash
+```
 
 hako-setup-check.bashでインストールされているか確認する
+```bash
+bash hako-setup-check.bash
+```
 
 ## 箱庭の環境変数
 
-devcontainer.jsonですでにLD_LIBRARY_PATHが設定されているので、コンテナ内であればインストールすれば動作する
+devcontainer.jsonですでにLD_LIBRARY_PATHとPATHが設定されているので、コンテナ内であればインストールすれば動作する
+
+```bash
+hako-cmd
+Usage: hako-cmd {start|stop|reset|status|pmeta|plog|dump <cid>|restore <cid> <bin>}|real_cid <asset_name> <cid>
+```
 
 ## C2Aのビルド方法
 
@@ -61,9 +73,9 @@ cargo run
 pnpm run devtools:sils
 ```
 
-SUBMOBCの実行:
+SUBOBCの実行（ターミナル）:
 ```bash
-cd example/mobc
+cd example/subobc
 cargo run
 ```
 
