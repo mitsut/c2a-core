@@ -65,17 +65,32 @@ pnpm install
 これで環境構築は完成。その他の依存ツールはDevContainer側でインストール済み
 
 ### ビルドと実行
+- ターミナルを4分割して起動します
+  1. MOBC
+  1. SUBOBC
+  1. hako-pdu-logger
+  1. hako-cmd実行用
 
-MOBCの実行:
+1. MOBCの実行:
 ```bash
 cd example/mobc
 cargo run
+```
+もしくは、WebSocketを含めたMOBCの実行
+```
 pnpm run devtools:sils
 ```
+hakoniwaのスタート待ちになるので、ブラウザを起動する
 
-SUBOBCの実行（ターミナル）:
+[http://localhost:8900/devtools/telemetries/RT.MOBC.HK](http://localhost:8900/devtools/telemetries/RT.MOBC.HK)
+
+2. SUBOBCの実行（ターミナル）:
 ```bash
 cd example/subobc
 cargo run
 ```
 
+4. hako-cmdの実行（ターミナル）：
+```
+hako-cmd start
+```
